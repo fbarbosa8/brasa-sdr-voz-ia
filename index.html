@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brasa · SDR de voz com IA</title>
+<meta name="description" content="Brasa: SaaS de prospecção B2B com agente de voz por IA. Portal do cliente, painel admin, créditos com extrato por ligação e simulador de telefonia. Projeto de Felipe Barbosa.">
+<meta property="og:title" content="Brasa · SDR de voz com IA">
+<meta property="og:description" content="SaaS de prospecção B2B com agente de voz por IA. Demo aberta com dados fictícios.">
+<meta property="og:image" content="assets/prints/painel.png">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F1EA; --surface:#FFFFFF; --ink:#14110F; --muted:#5E544C; --line:#E7DCD1;
+  --brand:#C42A0E; --brand-soft:#FBE3D9; --flame:linear-gradient(180deg,#FFB23E 0%,#FF4D1C 50%,#D92B0F 100%);
+  --radius:20px; --display:"Bricolage Grotesque",system-ui,sans-serif; --body:"Inter",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#14110F; --surface:#1E1916; --ink:#F3EDE6; --muted:#B5A99E; --line:#3A302A; --brand:#FF6A3D; --brand-soft:#3B1D12; }
+  .logo{filter:invert(1) hue-rotate(180deg) saturate(1.4)}
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+header{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+.logo{height:36px;width:auto}
+nav a{margin-left:22px;text-decoration:none;font-weight:500;color:var(--muted)}
+nav a:hover{color:var(--ink)}
+.hero{padding:72px 0 40px;text-align:center}
+.tag{display:inline-block;background:var(--brand-soft);color:var(--brand);font-weight:600;font-size:14px;padding:6px 14px;border-radius:99px;margin-bottom:22px}
+h1{font:800 clamp(40px,7vw,76px)/1.02 var(--display);letter-spacing:-.03em;max-width:900px;margin:0 auto}
+h1 em{font-style:normal;background:var(--flame);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:680px;margin:22px auto 34px}
+.ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 24px;border-radius:12px;font-weight:600;text-decoration:none;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--brand);color:#fff;box-shadow:0 8px 24px -8px rgba(196,42,14,.6)}
+.btn-ghost{border:1.5px solid var(--line);background:var(--surface)}
+.note{font-size:14px;color:var(--muted);margin-top:14px}
+.shot{margin:56px auto 0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);box-shadow:0 40px 80px -30px rgba(20,17,15,.35);background:var(--surface)}
+.shot img{display:block;width:100%;height:auto}
+section{padding:88px 0}
+h2{font:700 clamp(30px,4vw,44px)/1.1 var(--display);letter-spacing:-.02em;margin-bottom:14px}
+.sub{color:var(--muted);max-width:640px;margin-bottom:44px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:s}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+.step::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--flame);color:#fff;font:700 18px var(--display);margin-bottom:16px}
+.step h3,.feat h3{font:700 20px/1.25 var(--display);margin-bottom:8px}
+.step p,.feat p{color:var(--muted);font-size:16px}
+.feats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feat{border-top:2px solid var(--ink);padding-top:18px}
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.gallery figure{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.gallery img{display:block;width:100%;height:auto;cursor:zoom-in}
+.gallery figcaption{padding:14px 18px;font-size:15px;color:var(--muted)}
+.gallery figcaption b{color:var(--ink);font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{border:1px solid var(--line);background:var(--surface);padding:9px 16px;border-radius:99px;font-weight:500;font-size:15px}
+.try{background:var(--ink);color:var(--bg);border-radius:28px;padding:56px;display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+.try h2{color:var(--bg)}
+.try p,.try li{color:color-mix(in srgb,var(--bg) 75%,transparent)}
+.try ol{padding-left:20px;margin-top:10px}
+.try li{margin:6px 0}
+.try .btn-primary{background:#FF4D1C}
+footer{padding:48px 0 64px;color:var(--muted);font-size:15px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+dialog{border:0;padding:0;background:transparent;max-width:min(1400px,94vw)}
+dialog::backdrop{background:rgba(20,17,15,.85)}
+dialog img{width:100%;height:auto;border-radius:12px;display:block}
+@media (max-width:860px){
+  .steps,.feats,.gallery{grid-template-columns:1fr}
+  .try{grid-template-columns:1fr;padding:32px}
+  nav{display:none}
+  section{padding:64px 0}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img class="logo" src="assets/logo.svg" alt="Brasa">
+    <nav><a href="#como-funciona">Como funciona</a><a href="#telas">Telas</a><a href="#tecnologia">Tecnologia</a><a href="#demo">Testar</a></nav>
+  </header>
+
+  <div class="hero">
+    <span class="tag">SaaS · projeto próprio · 2026</span>
+    <h1>Um SDR de voz com IA que <em>liga, qualifica e agenda</em> reuniões.</h1>
+    <p class="lede">A Brasa liga para listas de empresas com um agente de voz por IA, conversa com quem atende e marca reuniões para o time comercial do cliente. Tudo acompanhado em um portal, com créditos pré-pagos e extrato por ligação.</p>
+    <div class="ctas">
+      <a class="btn btn-primary" href="https://brasa-demo-five.vercel.app" target="_blank" rel="noopener">Acessar a demo →</a>
+      <a class="btn btn-ghost" href="#telas">Ver as telas</a>
+    </div>
+    <p class="note">Demo com dados fictícios e telefonia simulada: nenhuma ligação real é feita.</p>
+    <div class="shot"><img src="assets/prints/painel.png" alt="Painel do cliente da Brasa com saldo, campanhas e reuniões marcadas" width="2880" height="1800"></div>
+  </div>
+</div>
+
+<section id="como-funciona">
+  <div class="wrap">
+    <h2>Como funciona</h2>
+    <p class="sub">Do cadastro da lista à reunião na agenda, sem ninguém do cliente precisar pegar o telefone.</p>
+    <div class="steps">
+      <div class="step"><h3>Importa a lista</h3><p>O cliente envia uma planilha de empresas. O sistema valida os telefones, remove duplicados e respeita quem pediu para não ser contatado.</p></div>
+      <div class="step"><h3>O agente liga</h3><p>Campanhas com horário comercial e ritmo diário controlados. O agente de voz conversa, contorna objeções e identifica interesse.</p></div>
+      <div class="step"><h3>A reunião aparece</h3><p>Quem aceita vira reunião marcada no portal, com resumo da conversa. Cada ligação fica no extrato com duração, resultado e custo.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>O que foi construído</h2>
+    <p class="sub">Um produto completo, pensado para operar com dinheiro e dados reais desde o primeiro dia.</p>
+    <div class="feats">
+      <div class="feat"><h3>Portal do cliente</h3><p>Campanhas, listas, reuniões, configuração do agente de voz, créditos e saque do saldo.</p></div>
+      <div class="feat"><h3>Painel administrativo</h3><p>Visão da operação, clientes, pagamentos, lista de supressão e trava central de ligações.</p></div>
+      <div class="feat"><h3>Créditos auditáveis</h3><p>Reserva antes de discar e débito por ligação em livro-caixa imutável: o extrato sempre fecha com o saldo.</p></div>
+      <div class="feat"><h3>Segurança</h3><p>Isolamento de dados por cliente no banco, 2FA no admin, proteção CSRF, política de conteúdo restritiva e senhas com hash forte.</p></div>
+      <div class="feat"><h3>Simulador de telefonia</h3><p>Reproduz o provedor de voz real, com eventos assinados, para testar campanhas inteiras sem gastar nem ligar para ninguém.</p></div>
+      <div class="feat"><h3>Qualidade</h3><p>Testes automatizados de unidade, integração e ponta a ponta, mais verificação de acessibilidade das telas.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="telas">
+  <div class="wrap">
+    <h2>Telas</h2>
+    <p class="sub">Capturas da demo. Clique para ampliar.</p>
+    <div class="gallery">
+      <figure><img src="assets/prints/campanha.png" alt="Detalhe de uma campanha" loading="lazy"><figcaption><b>Campanha</b> · ritmo diário, resultados e progresso da lista</figcaption></figure>
+      <figure><img src="assets/prints/extrato.png" alt="Extrato por ligação" loading="lazy"><figcaption><b>Extrato</b> · cada ligação com duração, resultado, custo e saldo</figcaption></figure>
+      <figure><img src="assets/prints/reunioes.png" alt="Reuniões marcadas" loading="lazy"><figcaption><b>Reuniões</b> · leads que aceitaram conversar</figcaption></figure>
+      <figure><img src="assets/prints/admin.png" alt="Painel administrativo" loading="lazy"><figcaption><b>Admin</b> · visão geral da operação</figcaption></figure>
+      <figure><img src="assets/prints/landing.png" alt="Página inicial do produto" loading="lazy"><figcaption><b>Site</b> · página de vendas do produto</figcaption></figure>
+      <figure><img src="assets/prints/lista.png" alt="Lista de empresas importada" loading="lazy"><figcaption><b>Listas</b> · importação com validação de telefones</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="tecnologia">
+  <div class="wrap">
+    <h2>Tecnologia</h2>
+    <p class="sub">Renderização no servidor, pouco JavaScript no navegador e um banco relacional no centro de tudo.</p>
+    <div class="chips">
+      <span class="chip">TypeScript</span><span class="chip">Node.js</span><span class="chip">Hono (JSX no servidor)</span><span class="chip">htmx</span><span class="chip">PostgreSQL</span><span class="chip">Drizzle ORM</span><span class="chip">Neon</span><span class="chip">Vercel</span><span class="chip">Vitest</span><span class="chip">Playwright</span><span class="chip">Zod</span><span class="chip">Agente de voz por IA</span>
+    </div>
+  </div>
+</section>
+
+<section id="demo">
+  <div class="wrap">
+    <div class="try">
+      <div>
+        <h2>Teste você mesmo</h2>
+        <p>Crie uma conta de demonstração em segundos. Ela já vem com uma semana de operação simulada para explorar.</p>
+        <ol>
+          <li>Abra a demo e clique em criar conta.</li>
+          <li>Escolha um nome e uma senha. Não pedimos e-mail.</li>
+          <li>Explore campanhas, extrato e reuniões.</li>
+        </ol>
+      </div>
+      <div style="text-align:center">
+        <a class="btn btn-primary" href="https://brasa-demo-five.vercel.app" target="_blank" rel="noopener">Acessar a demo →</a>
+        <p class="note" style="color:inherit;opacity:.7">Dados fictícios · nenhuma ligação real</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <footer>
+    <span>Projeto de <b>Felipe Barbosa</b> · 2026</span>
+    <span>Código-fonte privado. © Todos os direitos reservados.</span>
+  </footer>
+</div>
+
+<dialog id="zoom"><img alt=""></dialog>
+<script>
+const d=document.getElementById('zoom'),zi=d.querySelector('img');
+document.querySelectorAll('.gallery img').forEach(i=>i.addEventListener('click',()=>{zi.src=i.src;zi.alt=i.alt;d.showModal()}));
+d.addEventListener('click',()=>d.close());
+</script>
+</body>
+</html>
